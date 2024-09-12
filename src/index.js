@@ -1,5 +1,6 @@
 import "/assets/styles/styles.scss";
 import "./index.scss";
+import "./assets/javascripts/topbar.js";
 
 const articleContainerElement = document.querySelector(".articles-container");
 
@@ -13,7 +14,7 @@ const createArticles = (articles) => {
         <p class="article-author">${article.author} - ${article.category}</p>
         <p class="article-content"> ${article.content}</p>
         <div class="article-actions">
-          <button class="btn btn-danger" data-id=${article.id}>Supprimer</button>
+          <button class="btn btn-danger" data-id=${article._id}>Supprimer</button>
           <button class="btn btn-primary">Modifier</button>
         </div>
     `;
@@ -21,6 +22,27 @@ const createArticles = (articles) => {
   });
   articleContainerElement.innerHTML = "";
   articleContainerElement.append(...articleDOM);
+  //suppression d'elements au click sur supprimer
+  const deleteButtons = articleContainerElement.querySelectorAll(".btn-danger");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", async (event) => {
+      try {
+        const target = event.target;
+        const articleId = target.dataset.id;
+        const response = await fetch(
+          `https://restapi.fr/api/article/${articleId}`,
+          {
+            method: "DELETE",
+          }
+        );
+        let articles = await response.json();
+
+        fetchArticles();
+      } catch (error) {
+        console.log("error in delete:", error);
+      }
+    });
+  });
 };
 
 const fetchArticles = async () => {

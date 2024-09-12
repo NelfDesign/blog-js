@@ -1,3 +1,5 @@
+@use "./assets/styles/media-queries" as *;
+
 .content {
     display: flex;
     justify-content: center;
@@ -15,6 +17,9 @@
         flex-direction: column;
         align-items: center;
         box-shadow: var(--box-shadow);
+        @include xs{
+          padding: 0 2rem;
+        }
         img {
           height: 6rem;
           width: 6rem;
