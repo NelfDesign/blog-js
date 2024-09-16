@@ -9,6 +9,16 @@
   .sidebar{
     flex: 0 0 25rem;
     padding: 0 2rem 2rem 2rem;
+    select{
+      width: 100%;
+      margin-bottom: 2rem;
+      border-radius: 0.3rem;
+      background: white;
+      border: 0;
+      outline: O;
+      padding: 1rem;
+      box-shadow: var(--box-shadow);
+    }
     .categories{
       padding: 2rem;
       background: white;
@@ -25,12 +35,18 @@
           }
         }
       }
+      .active{
+        color: var(--primary);
+        font-weight: 700;
+        strong{
+          color: var(--primary);
+        }
+      }
     }
   }
   .articles-container {
     max-width: 80rem;
     flex: 1;
-    margin: 5rem 0 10rem 0;
     .article {
       background: white;
       padding: 0 5rem;

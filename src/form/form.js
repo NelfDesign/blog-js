@@ -1,6 +1,7 @@
 import "./form.scss";
 import "/assets/styles/styles.scss";
 import "/assets/javascripts/topbar.js";
+import { openModal } from "../assets/javascripts/modal";
 
 const form = document.querySelector("form");
 const errorElement = document.querySelector("#errors");
@@ -82,9 +83,13 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
-cancelButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  location.assign("/index.html");
+cancelButton.addEventListener("click", async (event) => {
+  const result = await openModal(
+    "Si vous quittez la page, vous allez perdre votre article."
+  );
+  if (result) {
+    location.assign("/index.html");
+  }
 });
 
 const formIsValid = (article) => {
